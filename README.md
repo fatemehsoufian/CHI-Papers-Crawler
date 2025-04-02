@@ -1,8 +1,6 @@
 # 📄 CHI-PromptExtraction
 
-This project is part of a research effort focused on understanding **how CHI 2024 authors use generative AI tools like ChatGPT and GPT-4**, particularly analyzing the prompts they disclose in their papers.
-
-🔍 The goal is to crawl through CHI 2024 papers, extract metadata (session, title, link), and build a dataset of papers that can later be analyzed for prompt usage disclosures.
+This project is part of a research effort focused on understanding **how CHI 2024 authors use generative AI tools like ChatGPT and GPT-4**.
 
 ---
 
