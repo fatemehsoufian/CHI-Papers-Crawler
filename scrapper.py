@@ -9,6 +9,7 @@ SESSION_SELECTOR = ".toc__section.accordion-tabbed__tab"
 OPEN_SESSION_SELECTOR = ".toc__section.accordion-tabbed__tab.js--open"
 PAPER_SELECTOR = ".issue-item__title"
 SESSION_TITLE_SELECTOR = ".section__title.accordion-tabbed__control.left-bordered-title"
+SESSIONS_SECTION_SELECTOR = ".accordion.sections"
 
 def start_driver():
     """
@@ -70,11 +71,13 @@ elements = driver.find_elements(By.CSS_SELECTOR, SESSION_SELECTOR)
 sessions = [el for el in elements if "SESSION" in el.text]
 print(f"📚 Found {len(sessions)} sessions")
 
+sessions_section = driver.find_element(By.CSS_SELECTOR, SESSIONS_SECTION_SELECTOR)
+
 for session in sessions:
     expand_session(session,True)
     time.sleep(5)
 
-    open_elements = driver.find_elements(By.CSS_SELECTOR,OPEN_SESSION_SELECTOR)
+    open_elements = sessions_section.find_elements(By.CSS_SELECTOR,OPEN_SESSION_SELECTOR)
     open_session =  [el for el in open_elements if  el.text.startswith("SESSION")]
 
     if len(open_session)==1:
