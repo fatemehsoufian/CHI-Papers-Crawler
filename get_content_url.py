@@ -7,6 +7,10 @@ import undetected_chromedriver as uc
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
 
+PAPER_FORMATS_SELECTOR = ".btn.btn--primary.btn--other"
+PAPER_HTML_FORMAT_SELECTOR = ".btn.btn--htmlFull.blue"
+PAPER_PDF_FORMAT_SELECTOR = ".btn.btn--pdf.red"
+
 options = uc.ChromeOptions()
 driver = uc.Chrome(options=options)
 
@@ -26,15 +30,15 @@ def get_content_url(paper_url):
     driver.get(paper_url)
     time.sleep(4)
     accept_cookies()
-    paper_formats_button = driver.find_element(By.CSS_SELECTOR,".btn.btn--primary.btn--other")
+    paper_formats_button = driver.find_element(By.CSS_SELECTOR,PAPER_FORMATS_SELECTOR)
     paper_formats_button.click()
     time.sleep(5)
     try:
-        paper_html_format_btn = driver.find_element(By.CSS_SELECTOR,".btn.btn--htmlFull.blue")
+        paper_html_format_btn = driver.find_element(By.CSS_SELECTOR,PAPER_HTML_FORMAT_SELECTOR)
         content_url = paper_html_format_btn.get_attribute("href")
         is_html_format = True
     except NoSuchElementException:
-        paper_pdf_format_btn = driver.find_element(By.CSS_SELECTOR,".btn.btn--pdf.red")
+        paper_pdf_format_btn = driver.find_element(By.CSS_SELECTOR,PAPER_PDF_FORMAT_SELECTOR)
         content_url = paper_pdf_format_btn.get_attribute("href")
         is_html_format = False
 
@@ -54,4 +58,4 @@ for index, row in papers_chi.iterrows():
 
 driver.quit()
 
-papers_chi.to_csv('output.csv', index=False)
+papers_chi.to_csv("output24.csv", index=False)
